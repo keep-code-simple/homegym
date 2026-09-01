@@ -1,0 +1,89 @@
+.runner {
+  margin: 0 0 var(--gap);
+  background: var(--steel);
+  border: 2px solid var(--steel-edge);
+  border-left: 6px solid var(--plate);
+  border-radius: 3px;
+}
+
+.runner-who {
+  display: flex;
+  gap: 2px;
+  border-bottom: 2px solid var(--mat);
+}
+.who {
+  flex: 1;
+  padding: 0 8px;
+  background: var(--steel-raised);
+  color: var(--chalk-faint);
+  font-weight: 600;
+  border-bottom: 4px solid transparent;
+}
+.who.is-on {
+  color: var(--chalk);
+  background: var(--steel);
+  border-bottom-color: var(--plate);
+}
+
+.runner-stage {
+  padding: 18px var(--pad) 8px;
+  text-align: center;
+}
+
+/* The scoreboard number: this has to be legible from six feet. */
+.runner-count {
+  margin: 0;
+  font-size: var(--hero);
+  line-height: 0.95;
+  color: var(--plate);
+}
+.runner-count.is-rest { color: var(--chalk-dim); }
+.runner-of {
+  font-size: 0.42em;
+  color: var(--chalk-dim);
+  margin-left: 4px;
+}
+
+.runner-phase {
+  margin: 2px 0 0;
+  font-size: var(--big);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--chalk);
+}
+
+.runner-ready {
+  margin: 0;
+  font-size: var(--big);
+  color: var(--chalk);
+}
+
+.runner-meta {
+  margin: 10px 0 0;
+  color: var(--chalk-dim);
+  font-size: 15px;
+}
+
+.runner-controls { padding: 0 var(--pad) var(--pad); }
+
+.runner-go {
+  width: 100%;
+  min-height: 72px;
+  background: var(--plate);
+  color: #fff;
+  border-radius: 3px;
+  font-family: var(--font-display);
+  font-size: 28px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+.runner-go.is-stop {
+  background: var(--steel-raised);
+  color: var(--chalk);
+  border: 2px solid var(--steel-edge);
+}
+.runner-go.is-quiet {
+  background: transparent;
+  color: var(--chalk);
+  border: 2px solid var(--steel-edge);
+}

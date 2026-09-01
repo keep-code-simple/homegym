@@ -1,0 +1,76 @@
+.demo { margin: 0 0 20px; }
+
+.demo-stage { position: relative; }
+
+.demo-still { margin: 0; }
+
+.demo-still svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  background: var(--steel);
+  border: 2px solid var(--steel-edge);
+  border-radius: 3px;
+}
+
+.demo.is-mistake .demo-still svg { border-color: var(--warn); }
+
+.demo-phase {
+  position: absolute;
+  left: 10px;
+  bottom: 10px;
+  font-size: 15px;
+  letter-spacing: 0.08em;
+  color: var(--chalk-dim);
+}
+
+.demo-pair { display: flex; gap: var(--gap); }
+.demo-pair .demo-still { flex: 1; }
+.demo-still figcaption {
+  margin-top: 6px;
+  font-size: 15px;
+  letter-spacing: 0.08em;
+  color: var(--chalk-dim);
+}
+
+.demo-caption {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  margin: 10px 0 0;
+  padding: 10px 12px;
+  background: var(--warn);
+  color: var(--warn-ink);
+  border-radius: 3px;
+  font-weight: 600;
+}
+.demo-caption-tag { letter-spacing: 0.1em; }
+
+.demo-controls {
+  display: flex;
+  gap: var(--gap);
+  margin-top: var(--gap);
+  flex-wrap: wrap;
+}
+
+.demo-controls button {
+  flex: 1 1 auto;
+  min-width: 120px;
+  padding: 0 18px;
+  background: var(--steel-raised);
+  border: 2px solid var(--steel-edge);
+  border-radius: 3px;
+  font-weight: 600;
+}
+
+.demo-controls button.is-on {
+  background: var(--chalk);
+  border-color: var(--chalk);
+  color: var(--mat);
+}
+
+.demo-controls .demo-mistake.is-on {
+  background: var(--warn);
+  border-color: var(--warn);
+  color: var(--warn-ink);
+}
