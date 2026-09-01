@@ -1,0 +1,47 @@
+/* The gym, not a generic app: rubber matting, painted steel, chalk, stencilled
+   numbers. Plate colours are the organising idea -- each person owns one. */
+:root {
+  /* Surfaces: rubber mat -> painted steel panel -> raised steel */
+  --mat: #16181a;
+  --mat-line: #22262a;
+  --steel: #23282d;
+  --steel-raised: #2d343a;
+  --steel-edge: #3d464e;
+
+  /* Chalk on steel. No thin light greys -- the dimmest text still passes 4.5:1. */
+  --chalk: #f2efe9;
+  --chalk-dim: #b3b8bd;
+  --chalk-faint: #8d949b;
+
+  /* Plate colours (Olympic code). Each family member owns one. */
+  --plate-red: #d5342f;
+  --plate-blue: #2f6fd5;
+  --plate-yellow: #e8b427;
+  --plate-green: #3f9e54;
+
+  /* Painted machine steel + safety warning */
+  --machine: #4a5257;
+  --machine-dark: #363c40;
+  --stack: #6c757b;
+  /* The stack lives in a light shrouded column with a red numbered scale
+     down the side -- the most recognisable part of the real machine, and
+     the thing you actually read to set the pin. */
+  --shroud: #c3c9cd;
+  --shroud-edge: #939ba1;
+  --shroud-window: #191c1f;
+  --strip-red: #c0392b;
+  --cable: #cfd4d8;
+  --warn: #e8862a;
+  --warn-ink: #1b1206;
+
+  --font-display: 'Oswald', 'Haettenschweiler', 'Arial Narrow', sans-serif;
+  --font-body: 'Inter Variable', 'Inter', system-ui, -apple-system, sans-serif;
+
+  /* Scoreboard scale -- these must read from six feet away. */
+  --hero: clamp(3.5rem, 14vw, 6rem);
+  --big: clamp(2rem, 7vw, 3rem);
+  --tap: 64px;
+
+  --gap: 12px;
+  --pad: 16px;
+}

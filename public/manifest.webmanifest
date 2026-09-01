@@ -1,0 +1,15 @@
+{
+  "name": "Home Gym",
+  "short_name": "Home Gym",
+  "description": "Coaching for a family training on a single-stack home gym.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#16181a",
+  "theme_color": "#16181a",
+  "icons": [
+    { "src": "./icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "./icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "./icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}
