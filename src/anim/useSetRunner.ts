@@ -67,10 +67,13 @@ export function useSetRunner(
   // The one place time has to move state along: synchronising with the rAF
   // clock, which is an external system. The last set skips the rest and reports
   // done immediately rather than making anyone sit through a countdown.
+  // Synchronising with the rAF clock is the exception this rule documents: a set
+  // ending is a moment in time, not something a render or an event can derive.
   useEffect(() => {
     if (stage !== 'running') return
     const boundary = isLastSet ? setEndMs : setEndMs + restMs
     if (loop.elapsed < boundary) return
+    // oxlint-disable-next-line react/set-state-in-effect
     nextSet()
   }, [stage, loop.elapsed, isLastSet, setEndMs, restMs, nextSet])
 
