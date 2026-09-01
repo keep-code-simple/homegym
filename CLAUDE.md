@@ -29,7 +29,7 @@ home gym, on a tablet in the workout room. Its primary job is teaching correct b
 position — bad form copied off a screen is worse than no app. Read `README.md` for
 the product shape.
 
-Two hard constraints that are easy to violate accidentally:
+Hard constraints that are easy to violate accidentally:
 
 - **Every exercise must be performable on the MWM-988 or be pure bodyweight.** The
   stations are the press arm, vertical butterfly, high pulley, low pulley, leg
