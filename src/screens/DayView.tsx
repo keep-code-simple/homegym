@@ -1,6 +1,7 @@
 import { ExerciseIcon } from '../components/ExerciseIcon'
 import { WARMUP, estimateMinutes } from '../data/program'
 import { getExercise } from '../data/exercises'
+import { planSession } from '../data/session'
 import type { Day, Person, Prescription } from '../types/program'
 
 function prescriptionText(p: Prescription | undefined) {
@@ -14,10 +15,11 @@ type Props = {
   day: Day
   people: Person[]
   onOpenExercise: (id: string) => void
+  onStartSession: () => void
   onBack: () => void
 }
 
-export function DayView({ day, people, onOpenExercise, onBack }: Props) {
+export function DayView({ day, people, onOpenExercise, onStartSession, onBack }: Props) {
   const exercises = day.exercises.map(getExercise)
 
   return (
@@ -65,9 +67,12 @@ export function DayView({ day, people, onOpenExercise, onBack }: Props) {
         ))}
       </ol>
 
-      <button className="start-session" disabled>
+      <button className="start-session" onClick={onStartSession}
+        disabled={exercises.length === 0}>
         Start session
-        <span className="start-note">Session mode is the next piece to build</span>
+        <span className="start-note">
+          All three of you, taking turns — {planSession(exercises, people).length} sets
+        </span>
       </button>
     </div>
   )

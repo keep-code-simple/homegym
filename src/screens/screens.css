@@ -149,6 +149,32 @@
 .start-session:disabled { background: var(--steel-raised); color: var(--chalk-faint); }
 .start-note { font-family: var(--font-body); font-size: 14px; font-weight: 400; }
 
+/* ---- session ---- */
+.sess-head { margin-bottom: 16px; }
+.sess-head h1 { font-size: 26px; }
+.sess-count { margin: 2px 0 8px; color: var(--chalk-dim); font-size: 15px; }
+
+.sess-bar {
+  height: 8px;
+  background: var(--steel);
+  border: 2px solid var(--steel-edge);
+  border-radius: 3px;
+  overflow: hidden;
+}
+.sess-bar span { display: block; height: 100%; background: var(--chalk-dim); }
+
+.sess-note { margin: 0 0 var(--gap); color: var(--chalk-dim); }
+
+.sess-done {
+  padding: 20px var(--pad);
+  background: var(--steel);
+  border: 2px solid var(--steel-edge);
+  border-radius: 3px;
+  text-align: center;
+}
+.sess-done-big { font-size: var(--big); margin-bottom: 8px; }
+.sess-done .day-crew { margin: 0 calc(var(--pad) * -1) var(--gap); }
+
 /* ---- exercise detail ---- */
 .ex-title { font-size: var(--big); }
 .ex-video { width: 100%; margin-bottom: var(--gap); border-radius: 3px; background: #000; }

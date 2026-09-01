@@ -1,8 +1,8 @@
 import { PLATE_LB } from '../data/program'
-import { PHASE_LABEL } from '../anim/tempo'
 import type { useSetRunner } from '../anim/useSetRunner'
 import type { useDemoLoop } from '../anim/useDemoLoop'
 import type { Person } from '../types/program'
+import { RunnerStage } from './RunnerStage'
 import './SetRunner.css'
 
 type Props = {
@@ -13,19 +13,20 @@ type Props = {
   usesStack: boolean
 }
 
-const mmss = (s: number) => `${Math.floor(s / 60)}:${String(s % 60).padStart(2, '0')}`
-
 /**
- * The coach: whose turn, what number they are on, and what their body should be
- * doing this second. Sized to be read from across the room.
- *
- * No elapsed time is shown during a rep set on purpose. A visible clock while
- * you lift invites racing, and the slow lower is the whole point of the tempo.
- * Time only appears where time is the exercise, and while resting.
+ * The coach for one person practising one exercise on their own: whose turn,
+ * what number they are on, and what their body should be doing this second.
+ * Session mode replaces the picker and the controls with a rotation, but the
+ * scoreboard in the middle is the same component.
  */
 export function SetRunner({ runner, loop, people, pin, usesStack }: Props) {
   const person = people.find((p) => p.id === runner.personId) ?? people[0]
   const { phase } = runner
+
+  const meta = phase === 'done'
+    ? `${person.name} is finished on this one`
+    : `${person.name} · set ${runner.setIndex + 1} of ${runner.sets}` +
+      (usesStack ? ` · pin ${pin} (${pin * PLATE_LB} lb)` : '')
 
   return (
     <section className="runner" style={{ '--plate': person.plateColour } as React.CSSProperties}>
@@ -41,49 +42,7 @@ export function SetRunner({ runner, loop, people, pin, usesStack }: Props) {
         ))}
       </div>
 
-      <div className="runner-stage">
-        {phase === 'working' && !runner.isHold && (
-          <>
-            <p className="runner-count stencil">
-              {runner.reps}<span className="runner-of">/{runner.targetReps}</span>
-            </p>
-            <p className="runner-phase stencil">{PHASE_LABEL[loop.phase]}</p>
-          </>
-        )}
-
-        {phase === 'working' && runner.isHold && (
-          <>
-            <p className="runner-count stencil">{runner.holdLeft}</p>
-            <p className="runner-phase stencil">Hold still</p>
-          </>
-        )}
-
-        {phase === 'resting' && (
-          <>
-            <p className="runner-count stencil is-rest">{mmss(runner.restLeft)}</p>
-            <p className="runner-phase stencil">Rest — others are lifting</p>
-          </>
-        )}
-
-        {phase === 'idle' && (
-          <p className="runner-ready stencil">
-            {runner.isHold
-              ? `${runner.holdSeconds} seconds`
-              : `${runner.minReps}–${runner.targetReps} reps`}
-          </p>
-        )}
-
-        {phase === 'done' && (
-          <p className="runner-ready stencil">All {runner.sets} sets done</p>
-        )}
-
-        <p className="runner-meta">
-          {phase === 'done'
-            ? `${person.name} is finished on this one`
-            : `${person.name} · set ${runner.setIndex + 1} of ${runner.sets}`}
-          {usesStack && phase !== 'done' && ` · pin ${pin} (${pin * PLATE_LB} lb)`}
-        </p>
-      </div>
+      <RunnerStage runner={runner} loop={loop} meta={meta} />
 
       <div className="runner-controls">
         {phase === 'idle' && (

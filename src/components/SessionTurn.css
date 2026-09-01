@@ -1,0 +1,87 @@
+/* The turn's exercise, small: on this screen the scoreboard is the hero and the
+   name is just orientation. */
+.turn-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+.turn-pos {
+  flex: none;
+  padding: 2px 8px;
+  background: var(--steel-raised);
+  border-radius: 3px;
+  color: var(--chalk-dim);
+  font-size: 18px;
+}
+.turn-name { display: flex; flex-direction: column; }
+.turn-name .display { font-size: 22px; }
+.turn-station { color: var(--chalk-dim); font-size: 14px; }
+
+/* The rotation read-out. It is deliberately not tappable: the order is the
+   plan, and letting anyone jump the queue mid-session loses the count. */
+.who.is-static {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1px;
+  min-height: var(--tap);
+  padding: 6px 8px;
+  text-align: center;
+}
+.who-left { font-size: 13px; font-weight: 400; color: var(--chalk-faint); }
+.who.is-on .who-left { color: var(--chalk-dim); }
+
+/* Whoever is next needs the pin number before they sit down, not after. */
+.handoff {
+  margin: 0 var(--pad) 12px;
+  padding: 12px 14px;
+  background: var(--steel-raised);
+  border-radius: 3px;
+  text-align: center;
+}
+.handoff-next {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 26px;
+  font-weight: 600;
+}
+.handoff-tag {
+  margin-right: 10px;
+  color: var(--chalk-faint);
+  font-size: 15px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.handoff-pin {
+  margin: 4px 0 0;
+  color: var(--chalk-dim);
+  font-size: 16px;
+}
+
+.turn-skip {
+  width: 100%;
+  min-height: 48px;
+  margin-top: 6px;
+  color: var(--chalk-faint);
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.turn-pin {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--gap);
+  padding: 12px var(--pad) var(--pad);
+  border-top: 2px solid var(--mat);
+}
+.turn-pin-who { color: var(--chalk-dim); font-size: 15px; }
+
+.handoff-setup {
+  margin: 10px 0 0;
+  padding-left: 20px;
+  color: var(--chalk-dim);
+  font-size: 15px;
+  text-align: left;
+}
