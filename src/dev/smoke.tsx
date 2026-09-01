@@ -42,7 +42,8 @@ export function smoke(): string[] {
     out.push(
       `ExerciseDetail ${ex.id.padEnd(16)}: ${String(html.length).padStart(5)} chars, ` +
       `${cues} list items, mistake toggle ${html.includes('Show the mistake') ? 'yes' : 'NO'}, ` +
-      `pin controls ${(html.match(/pin-num/g) ?? []).length}`,
+      `pin controls ${(html.match(/pin-num/g) ?? []).length}, ` +
+      `${(html.match(/person-row is-on/g) ?? []).length} row on the stack`,
     )
   }
   const session = renderToStaticMarkup(

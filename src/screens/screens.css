@@ -190,6 +190,17 @@
   border-top: 2px solid var(--steel-raised);
 }
 .person-row:first-child { border-top: none; padding-top: 0; }
+
+/* Whose pin the stack in the demonstration is showing. Editing anyone's pin
+   switches the drawing to them, so which row is live has to be obvious. */
+.person-row.is-on {
+  margin: 0 -8px;
+  padding: 10px 8px;
+  background: var(--steel-raised);
+  border-top-color: transparent;
+  border-radius: 3px;
+  box-shadow: inset 4px 0 0 var(--plate);
+}
 .person-id { display: flex; align-items: center; gap: 10px; }
 .person-id span { display: flex; flex-direction: column; }
 .person-pres { font-size: 14px; color: var(--chalk-dim); }

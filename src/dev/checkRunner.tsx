@@ -2,6 +2,7 @@ import { renderToStaticMarkup } from 'react-dom/server'
 import { CYCLE, TEMPO, repsCompletedAt } from '../anim/tempo'
 import { Handoff } from '../components/SessionTurn'
 import { SetRunner } from '../components/SetRunner'
+import { WeightStack } from '../components/station/parts/WeightStack'
 import { PEOPLE } from '../data/people'
 import { DAY1 } from '../data/exercises/day1'
 import { pinCall, planSession, setsLeft } from '../data/session'
@@ -33,6 +34,15 @@ export function checkRunner(): string[] {
     assert(`counter one cycle earlier`, repsCompletedAt((target - 1) * CYCLE), target - 1, out)
   }
   out.push(`--- a 12-rep set takes ${(12 * CYCLE) / 1000}s, a 15-rep set ${(15 * CYCLE) / 1000}s`)
+
+  // The pin has to be visible in the drawing, not just in the text: the plates
+  // that travel are the ones at and above it, as on the machine.
+  for (const pin of [1, 5, 15]) {
+    const html = renderToStaticMarkup(
+      <svg><WeightStack pin={pin} lift={12} colour="#d5342f" /></svg>,
+    )
+    assert(`plates moving at pin ${pin}`, (html.match(/#d5342f/g) ?? []).length, pin, out)
+  }
 
   // ---- the session rotation ----
   const turns = planSession(DAY1, PEOPLE)
