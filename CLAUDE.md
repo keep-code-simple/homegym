@@ -10,6 +10,7 @@ npm run build                 # tsc -b && vite build
 npm run lint                  # oxlint
 npm run preview
 
+npm run icons                 # regenerate home-screen icons (macOS only)
 npm run poses                 # render every Day 1 pose to /tmp/posesheet.svg
 npm run poses -- chest-press  # just one exercise
 npm run smoke                 # SSR-render every screen; crash check
@@ -36,8 +37,16 @@ Two hard constraints that are easy to violate accidentally:
   dumbbells, no barbell, no squat rack, no leg press. Do not add exercises needing
   them.
 - **Fully offline.** No CDN, no runtime network calls, no external asset downloads.
-  Fonts come from npm (`@fontsource/*`) so Vite bundles them. `base: './'` so
-  `dist/` works from any path. Adding a remote URL breaks the room this runs in.
+  Fonts come from npm (`@fontsource/*`) so Vite bundles them. A generated service
+  worker (`scripts/make-sw.mjs`, run by `npm run build`) precaches the whole
+  build. Adding a remote URL breaks the room this runs in.
+- **Every URL must be relative.** The app is served from a project subpath on
+  GitHub Pages (`/homegym/`). `base` is `'./'`; the manifest, icons and service
+  worker are referenced as `./…`. Any path starting with `/` 404s in production
+  but works locally, so it will not show up until it is deployed.
+- **Navigation never changes the URL** (`history.pushState` is called without a
+  URL argument). That is why no `404.html` fallback is needed. Introducing real
+  routes means adding one.
 
 ## The animation architecture
 

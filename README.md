@@ -20,6 +20,27 @@ npm run preview
 No backend, no accounts, no network at runtime. Fonts are bundled from npm, so a
 built `dist/` works with the wifi off.
 
+## Deploying
+
+Pushing to `main` builds and publishes to GitHub Pages at
+**https://keep-code-simple.github.io/homegym/** — see
+`.github/workflows/deploy.yml`. The deploy is gated on lint, `npm run check`
+and `npm run smoke`.
+
+Two things make the subpath work, and both are easy to break:
+
+- **Every URL the app emits must be relative.** Vite's `base` is `'./'`, and the
+  manifest, icons and service worker are all referenced as `./…`. A path
+  starting with `/` resolves to the domain root and 404s.
+- **Navigation never changes the URL.** `history.pushState` is called without a
+  URL argument, so there are no deep links for Pages to 404 on and no
+  `404.html` fallback is needed. Adding real routes would need one.
+
+It installs to a tablet home screen (Add to Home Screen → opens full-screen) and
+a generated service worker precaches the whole build, so it opens with the wifi
+off. Icons are committed; regenerate them from the app's own `Figure` with
+`npm run icons` (macOS only — CI never runs it).
+
 ## What is built so far
 
 - **Home** — the five-day week, today promoted, a plate-coloured cell per person
