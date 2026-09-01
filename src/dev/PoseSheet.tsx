@@ -1,3 +1,5 @@
+// oxlint-disable react/only-export-components -- a dev-only entry point that
+// mounts itself; it has no exports by design and is not in the built app.
 import { createRoot } from 'react-dom/client'
 import { Figure } from '../components/figure/Figure'
 import { handOf } from '../components/figure/kinematics'
