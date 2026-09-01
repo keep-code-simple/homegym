@@ -53,8 +53,12 @@ off. Icons are committed; regenerate them from the app's own `Figure` with
   through it: rep number, the phase called out (*press · hold · lower*), set
   number, and their pin. Holds get a countdown instead of reps. A rest clock
   runs after every set.
+- **Session mode** — the whole day run as one rotation for all three of you:
+  warm-up, then every set of every exercise handed to whoever is up next, then
+  the tick. Between sets it says who is next and what the pin has to do; at a
+  change of station it hands over the setup too.
 
-Not built yet: session mode, and Days 2–5.
+Not built yet: Days 2–5.
 
 ## How the animation works
 
@@ -104,8 +108,29 @@ Two rules built into it:
   open. Only the day-completion tick persists. Stored durations are one step
   from a personal best, which this app does not do for anyone.
 
-Session mode becomes a three-person rotation wrapped around this rather than
-new machinery.
+## Session mode
+
+`src/data/session.ts` turns a day into a flat list of turns — one person, one
+exercise, one set — and `src/screens/Session.tsx` walks it. There is no new
+timing machinery: each turn is the same `useSetRunner`, handed a single set,
+because the rotation decides when someone is up again rather than the runner.
+A one-set runner is also a runner with no rest countdown, which is right: on one
+stack, your rest is the other two taking their turn.
+
+Two things the rotation gets deliberately right:
+
+- **Everybody does set one before anybody does set two**, and whoever has the
+  most sets goes first in each round. Start them last instead and the adult's
+  third set lands immediately after his second, since the boys have dropped out
+  by then. `npm run check` asserts nobody lifts twice in a row inside an
+  exercise.
+- **The handoff carries the instructions**, not the congratulation: who is up,
+  what the pin has to do (including "pin stays at 4" — silence is not an
+  instruction), and the setup for the new station when the exercise changes.
+
+Across the seam between two exercises the same person can lift twice running.
+That one is left alone: the seat moves, the handles change and everyone walks to
+the other side of the machine, which is the rest.
 
 ## The machine drawing
 

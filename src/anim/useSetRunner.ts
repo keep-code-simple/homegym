@@ -26,6 +26,13 @@ export function useSetRunner(
   exercise: Exercise,
   loop: ReturnType<typeof useDemoLoop>,
   initialPersonId: string,
+  /**
+   * Session mode hands out one set at a time, because the rotation -- not this
+   * hook -- decides when a person is up again. A single-set runner is also a
+   * runner with no rest: its one set is its last, so it reports done the moment
+   * the set ends instead of starting a countdown nobody would sit through.
+   */
+  setsOverride?: number,
 ) {
   const [personId, setPerson] = useState(initialPersonId)
   const [stage, setStage] = useState<'idle' | 'running' | 'done'>('idle')
@@ -33,7 +40,7 @@ export function useSetRunner(
 
   const pres = exercise.prescription[personId]
   const isHold = Boolean(pres && 'holdSeconds' in pres)
-  const sets = pres?.sets ?? 0
+  const sets = setsOverride ?? pres?.sets ?? 0
   const targetReps = pres && 'reps' in pres ? pres.reps[1] : 0
   const minReps = pres && 'reps' in pres ? pres.reps[0] : 0
   const holdSeconds = pres && 'holdSeconds' in pres ? pres.holdSeconds : 0

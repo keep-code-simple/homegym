@@ -107,7 +107,8 @@ colours and **throws on an unknown token** — a new CSS variable must be added 
 
 `ExercisePractice` owns a single `useDemoLoop` and hands it to both `ExerciseDemo`
 and `useSetRunner`, so the figure on screen is always doing the rep the counter
-says it is. Do not give either its own loop.
+says it is. Do not give either its own loop. `Session` owns one for the whole
+session and hands it down to each turn, for the same reason.
 
 `useSetRunner` derives everything it can from that clock — current rep, whether the
 set is over, rest remaining. The only stored state is what a person chose. That
@@ -149,8 +150,32 @@ Do not "fix" these back:
    tempo, plus a pin change between every set. `estimateMinutes` computes it rather
    than hardcoding, so it stays honest as the program is edited.
 
+## Session mode
+
+`planSession` in `src/data/session.ts` flattens a day into turns — one person, one
+exercise, one set — and `src/screens/Session.tsx` walks that list. There is no
+second timing engine: a turn is `useSetRunner` handed a single set (its fourth
+argument), because the rotation decides when someone is up again, not the runner.
+A one-set runner is also a runner with no rest countdown, which is the point: on
+one stack, a person's rest is the other two taking their turn.
+
+- **Each turn is mounted with its index as `key`.** That is what resets the
+  runner between turns; do not add an effect that reaches in and resets it.
+- **Order within an exercise: most sets first.** Everybody does set one before
+  anybody does set two, and whoever has the extra sets starts each round so those
+  extra sets keep the widest gap in front of them. Start them last and the
+  adult's third set lands straight after his second, because the boys have
+  finished by then. `npm run check` asserts nobody lifts twice in a row inside an
+  exercise. Across the seam between two exercises they can, and that is left
+  alone — the station change is the rest.
+- **The handoff is instructions, not congratulation.** `pinCall` always says what
+  the pin does, including "pin stays at 4"; silence is not an instruction. The
+  `Handoff` component is exported so `checkRunner` renders all five shapes of it.
+
+`RunnerStage` is the scoreboard both the single-exercise runner and the session
+share; put anything that must read the same in both rooms there.
+
 ## Still to build
 
-Session mode (a three-person rotation wrapping `useSetRunner` and walking the day's
-exercise list) and Days 2–5. `DAYS` in `src/data/program.ts` declares all five; only
-Day 1 has exercises.
+Days 2–5. `DAYS` in `src/data/program.ts` declares all five; only Day 1 has
+exercises.

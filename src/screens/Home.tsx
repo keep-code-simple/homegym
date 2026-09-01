@@ -1,3 +1,4 @@
+import { CrewTicks } from '../components/CrewTicks'
 import { DAYS, estimateMinutes, todayDayId } from '../data/program'
 import type { Person } from '../types/program'
 import type { useStore } from '../storage/useStore'
@@ -38,21 +39,7 @@ export function Home({ people, store, onOpenDay }: Props) {
                   </span>
                 </button>
 
-                <div className="day-crew">
-                  {people.map((p) => {
-                    const done = store.isDone(p.id, day.id)
-                    return (
-                      <button key={p.id}
-                        className={`crew-dot ${done ? 'is-done' : ''}`}
-                        style={{ '--plate': p.plateColour } as React.CSSProperties}
-                        aria-pressed={done}
-                        aria-label={`${p.name}: ${day.focus} ${done ? 'done' : 'not done'} this week`}
-                        onClick={() => store.toggleDone(p.id, day.id)}>
-                        <span className="crew-name">{p.name}</span>
-                      </button>
-                    )
-                  })}
-                </div>
+                <CrewTicks people={people} store={store} dayId={day.id} what={day.focus} />
               </article>
             </li>
           )
