@@ -4,6 +4,8 @@ A coaching app for a dad and two sons training on a **Marcy MWM-988** single-sta
 home gym. Runs on a phone or tablet in the workout room. The app is the coach: the
 boys open it and run the session themselves.
 
+**New here and just want to train?** Read the [user guide](docs/USAGE.md).
+
 Its most important job is teaching correct body position, so every exercise carries
 an animated side-view demonstration, the cues, and a toggle that replays the same
 movement done **wrong**.
